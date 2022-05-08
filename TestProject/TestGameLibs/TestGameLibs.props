@@ -1,0 +1,5 @@
+<Project>
+    <ItemGroup>
+        <HookGen Include="Dummy.GameLibs" Version="1.0.0" DummyDirectory="$(MSBuildThisFileDirectory)" HookGenList="MyDll.dll" />
+    </ItemGroup>
+</Project>

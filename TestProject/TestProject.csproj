@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <Import Project="./TestGameLibs/TestGameLibs.props" />
+    <Import Project="../HookGen.MSBuild.props" />
+    
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <LangVersion>10</LangVersion>
+        
+        <TaskAssembly>$(MSBuildThisFileDirectory)../bin/Debug/netstandard2.1/HookGen.MSBuild.dll</TaskAssembly>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include=" ../HookGen.MSBuild.csproj" ReferenceOutputAssembly="false" />
+    </ItemGroup>
+
+</Project>

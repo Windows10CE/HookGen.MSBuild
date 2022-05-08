@@ -1,0 +1,21 @@
+<Project TreatAsLocalProperty="TaskFolder;TaskAssembly">
+    <PropertyGroup>
+        <TaskFolder Condition="'$(MSBuildRuntimeType)' == 'Core'">netstandard2.1</TaskFolder>
+        <TaskFolder Condition="'$(MSBuildRuntimeType)' != 'Core'">net472</TaskFolder>
+        <TaskAssembly>$(MSBuildThisFileDirectory)..\lib\$(TaskFolder)\$(MSBuildThisFileName).dll</TaskAssembly>
+    </PropertyGroup>
+
+    <UsingTask TaskName="HookGenTask" AssemblyFile="$(TaskAssembly)" />
+
+    <Target Name="HookGenGameLibs" BeforeTargets="ResolveAssemblyReferences">
+        <HookGenTask HookGen="@(HookGen)">
+            <Output TaskParameter="HookGenedDlls" ItemName="HookGenedDlls" />
+        </HookGenTask>
+
+        <ItemGroup>
+            <Reference Include="%(HookGenedDlls.Identity)">
+                <Private>false</Private>
+            </Reference>
+        </ItemGroup>
+    </Target>
+</Project>
