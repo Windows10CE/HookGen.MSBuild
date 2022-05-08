@@ -9,7 +9,7 @@
         <Nullable>enable</Nullable>
         <LangVersion>10</LangVersion>
         
-        <TaskAssembly>$(MSBuildThisFileDirectory)../bin/Debug/netstandard2.1/HookGen.MSBuild.dll</TaskAssembly>
+        <TaskAssembly>$(MSBuildThisFileDirectory)../bin/Debug/netstandard2.0/HookGen.MSBuild.dll</TaskAssembly>
     </PropertyGroup>
 
     <ItemGroup>
