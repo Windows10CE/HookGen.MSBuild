@@ -16,4 +16,10 @@
       <ProjectReference Include=" ../HookGen.MSBuild.csproj" ReferenceOutputAssembly="false" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Reference Include="MyDll">
+        <HintPath>TestGameLibs\MyDll.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
 </Project>

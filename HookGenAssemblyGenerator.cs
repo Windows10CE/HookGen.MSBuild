@@ -1,3 +1,4 @@
+using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using Microsoft.Build.Utilities;
@@ -31,16 +32,13 @@ public sealed class HookGenAssemblyGenerator
         {
             return outDir;
         }
-        
-        Environment.SetEnvironmentVariable("MONOMOD_HOOKGEN_PRIVATE", "1");
-        Environment.SetEnvironmentVariable("MONOMOD_DEPENDENCY_MISSING_THROW", "0");
 
         Parallel.ForEach(Package.HookGenList, asm =>
         {
             HookGen(asm, outDir);
         });
         
-        File.WriteAllText(hashPath, hash);
+        //File.WriteAllText(hashPath, hash);
 
         return outDir;
     }
@@ -52,7 +50,6 @@ public sealed class HookGenAssemblyGenerator
         using MonoModder mm = new()
         {
             InputPath = asmPath,
-            OutputPath = outPath,
             ReadingMode = ReadingMode.Deferred
         };
 
@@ -65,9 +62,9 @@ public sealed class HookGenAssemblyGenerator
             File.Delete(outPath);
 
         HookGenerator gen = new(mm, outPath);
+        using var mout = gen.OutputModule;
         gen.Generate();
-        gen.OutputModule.Write(outPath);
-        gen.OutputModule.Dispose();
+        mout.Write(outPath);
     }
 
     private static string ComputeHash(string directory)
